@@ -87,7 +87,7 @@ $.prototype.carousel = function() {
 
         if (slidesField.getAttribute('data-auto')) {
             const intervalTimer = () => {
-                const timerSlide = setInterval(nextBtn, 1000);
+                const timerSlide = setInterval(nextBtn, 10000);
 
                 slidesField.addEventListener('mouseenter', () => {
                     clearInterval(timerSlide);

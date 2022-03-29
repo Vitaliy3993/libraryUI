@@ -1,4 +1,4 @@
-import './lib/lib';
+import $ from './lib/lib';
 
 /* $('button').on('click', function() {
     $('div').eq(1).toggleClass('active');
@@ -85,6 +85,9 @@ $('#trigger2').click(() => $('#trigger2').createModal({
         ]
     }
 }));
+
+$().get('https://jsonplaceholder.typicode.com/todos/1')
+    .then(res => console.log(res))
 
 /* $('.wrap').html(
     `<div class="dropdown">

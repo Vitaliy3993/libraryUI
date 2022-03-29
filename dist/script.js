@@ -210,7 +210,7 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.carousel = function () {
 
     if (slidesField.getAttribute('data-auto')) {
       const intervalTimer = () => {
-        const timerSlide = setInterval(nextBtn, 1000);
+        const timerSlide = setInterval(nextBtn, 10000);
         slidesField.addEventListener('mouseenter', () => {
           clearInterval(timerSlide);
         });
@@ -454,6 +454,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/tab */ "./src/js/lib/components/tab.js");
 /* harmony import */ var _components_accordion__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/accordion */ "./src/js/lib/components/accordion.js");
 /* harmony import */ var _components_carousel__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/carousel */ "./src/js/lib/components/carousel.js");
+/* harmony import */ var _services_requests__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./services/requests */ "./src/js/lib/services/requests.js");
+
 
 
 
@@ -942,6 +944,59 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.click = function (handle
 
 /***/ }),
 
+/***/ "./src/js/lib/services/requests.js":
+/*!*****************************************!*\
+  !*** ./src/js/lib/services/requests.js ***!
+  \*****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core */ "./src/js/lib/core.js");
+
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.get = async function (url) {
+  let dataTypeAnswer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'json';
+  let res = await fetch(url);
+
+  if (!res.ok) {
+    throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+  }
+
+  switch (dataTypeAnswer) {
+    case 'json':
+      return await res.json();
+
+    case 'text':
+      return await res.text();
+
+    case 'blob':
+      return await res.blob();
+  }
+};
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.post = async function (url, data) {
+  let dataTypeAnswer = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'text';
+  let res = await fetch(url, {
+    method: "POST",
+    body: data
+  });
+
+  switch (dataTypeAnswer) {
+    case 'json':
+      return await res.json();
+
+    case 'text':
+      return await res.text();
+
+    case 'blob':
+      return await res.blob();
+  }
+};
+
+/***/ }),
+
 /***/ "./src/js/main.js":
 /*!************************!*\
   !*** ./src/js/main.js ***!
@@ -963,16 +1018,16 @@ __webpack_require__.r(__webpack_exports__);
     $('.some').scaleIn(1500);
 }); */
 
-$('#primary').click(function () {
-  $('div').eq(1).fadeToggle(800);
+Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('#primary').click(function () {
+  Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('div').eq(1).fadeToggle(800);
 });
-$('[data-count="second"]').click(function () {
-  $('div').eq(2).fadeToggle(800);
+Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('[data-count="second"]').click(function () {
+  Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('div').eq(2).fadeToggle(800);
 });
-$('button').eq(2).on('click', () => {
-  $('.w-500').fadeToggle(800);
+Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('button').eq(2).on('click', () => {
+  Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('.w-500').fadeToggle(800);
 });
-$('#trigger').click(() => $('#trigger').createModal({
+Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('#trigger').click(() => Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('#trigger').createModal({
   text: {
     title: 'Modal title',
     body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum minus doloremque nesciunt enim rem quam corporis? Dolorem pariatur magnam distinctio perferendis. Ratione dolorem voluptates iusto facilis odit veritatis, suscipit voluptatibus!'
@@ -986,7 +1041,7 @@ $('#trigger').click(() => $('#trigger').createModal({
     }]]
   }
 }));
-$('#trigger2').click(() => $('#trigger2').createModal({
+Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('#trigger2').click(() => Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('#trigger2').createModal({
   text: {
     title: 'Modal title2',
     body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum minus doloremque nesciunt enim rem quam corporis? Dolorem pariatur magnam distinctio perferendis. Ratione dolorem voluptates iusto facilis odit veritatis, suscipit voluptatibus! Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum minus doloremque nesciunt enim rem quam corporis? Dolorem pariatur magnam distinctio perferendis. Ratione dolorem voluptates iusto facilis odit veritatis, suscipit'
@@ -1000,6 +1055,7 @@ $('#trigger2').click(() => $('#trigger2').createModal({
     }]]
   }
 }));
+Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])().get('https://jsonplaceholder.typicode.com/todos/1').then(res => console.log(res));
 /* $('.wrap').html(
     `<div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton">Dropdown button</button>
